@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ product.name }}</h2>
+<p class="text-muted">Category: {{ product.category }}</p>
+<h4>£{{ "%.2f"|format(product.price) }}</h4>
+<form action="/cart" method="post">
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <button type="submit" class="btn btn-success">Add to Cart</button>
+</form>
+<hr>
+<h5>🤖 AI Recommendations</h5>
+<div class="row">
+    {% for rec in recommendations %}
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h6>{{ rec.name }}</h6>
+                <p>£{{ "%.2f"|format(rec.price) }}</p>
+                <a href="/product/{{ rec.id }}" class="btn btn-sm btn-outline-primary">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
